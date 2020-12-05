@@ -2,7 +2,7 @@ name: JustChat
 main: ru.mclegendary.justchat.JustChat
 version: '4.8'
 description: "Chat formatting plugin."
-softdepend: [PlaceholderAPI, LuckPerms]
+softdepend: [PlaceholderAPI, LuckPerms, MarriageMaster]
 
 commands:
   justchat:

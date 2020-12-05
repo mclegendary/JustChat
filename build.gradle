@@ -24,6 +24,8 @@ dependencies {
     //compileOnly "org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT"
     // PAPI
     compileOnly 'me.clip:placeholderapi:2.10.9'
+    // Marriage Master
+    compileOnly fileTree(dir: "D:\\Code\\Libs\\MarriageMaster.jar", include: "*.jar")
 }
 
 

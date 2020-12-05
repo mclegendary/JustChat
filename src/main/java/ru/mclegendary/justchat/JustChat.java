@@ -2,10 +2,14 @@ package ru.mclegendary.justchat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import ru.mclegendary.justchat.command.Reload;
 import ru.mclegendary.justchat.event.Listeners;
+import ru.mclegendary.justchat.placeholder.JustChatExpansion;
+
+import at.pcgamingfreaks.MarriageMaster.Bukkit.MarriageMaster;
 
 import static ru.mclegendary.justchat.ConfigManager.setupConfig;
 
@@ -18,10 +22,11 @@ public class JustChat extends JavaPlugin {
         main = this;
 
         setupConfig();
+        placeholdersSetup();
         getLogger().info(ChatColor.AQUA + "Enabled");
 
         // Placeholder plugin check && Events registering
-        if (PlaceholderAPI()) {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
@@ -31,10 +36,6 @@ public class JustChat extends JavaPlugin {
         this.getCommand("justchat").setExecutor(new Reload());
     }
 
-    public JustChat getMain() {
-        return main;
-    }
-
     @Override
     public void onDisable() {
         getLogger().info(ChatColor.AQUA + "Disabled");
@@ -42,13 +43,23 @@ public class JustChat extends JavaPlugin {
 
 
 
-
-    public boolean PlaceholderAPI() {
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            return true;
-        } else {
-            getLogger().warning("Не могу найти плагин PlaceholderAPI! Он необходим для моего запуска :(");
-            return false;
+    public JustChat getMain() {
+        return main;
+    }
+    public void placeholdersSetup() {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            getLogger().info(ChatColor.DARK_RED + "Something went wrong with PAPI :P");
+            return;
         }
+
+        new JustChatExpansion().register();
+    }
+    public MarriageMaster getMarriageMaster() {
+        Plugin bukkitPlugin = Bukkit.getPluginManager().getPlugin("MarriageMaster");
+        if(!(bukkitPlugin instanceof MarriageMaster)) {
+            getLogger().info(ChatColor.DARK_RED + "MarriageMaster плагин не найден :(");
+            return null;
+        }
+        return (MarriageMaster) bukkitPlugin;
     }
 }

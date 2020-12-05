@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static me.clip.placeholderapi.PlaceholderAPI.setPlaceholders;
@@ -23,14 +25,16 @@ public class ChatFormattingExecutor {
         String globalPrefix = config.getString("Global.Prefix");
         String staffPrefix = config.getString("Staff.Prefix");
 
-        String shortMessageWarn = config.getString("Too short message");
+        String shortMessageWarn = config.getString("Short-Message-Warning");
+        String fixedMessage = message.replace("%", "%%");
 
         String globalFormat = setPlaceholders(player, config.getString("Global.Format"));
         String staffFormat = setPlaceholders(player, config.getString("Staff.Format"));
         String localFormat = setPlaceholders(player, config.getString("Local.Format"));
 
+        List<String> colorTranslate = Arrays.asList(globalFormat, staffFormat, localFormat, shortMessageWarn);
+        colorTranslate.forEach(it -> ChatColor.translateAlternateColorCodes('&', it));
 
-        String fixedMessage = message.replace("%", "%%");
 
         if (player.hasPermission("justchat.colors")) {
             fixedMessage = ChatColor.translateAlternateColorCodes('&', fixedMessage);
@@ -46,6 +50,7 @@ public class ChatFormattingExecutor {
         if (message.startsWith(staffPrefix) && player.hasPermission("justchat.staff")) {
             isStaff = true;
         }
+
 
         if (isGlobal) {
             if (message.length() < 2) { player.sendMessage(shortMessageWarn); e.setCancelled(true); }
