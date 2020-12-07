@@ -3,7 +3,3 @@ main: ru.mclegendary.justchat.JustChat
 version: '4.8'
 description: "Chat formatting plugin."
 softdepend: [PlaceholderAPI, LuckPerms, MarriageMaster]
-
-commands:
-  justchat:
-    usage: /<command> [reload\?]

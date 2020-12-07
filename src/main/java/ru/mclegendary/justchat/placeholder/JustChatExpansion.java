@@ -7,7 +7,8 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import static ru.mclegendary.justchat.JustChat.main;
+import static ru.mclegendary.justchat.JustChat.getMain;
+import static ru.mclegendary.justchat.util.Util.colorize;
 
 public class JustChatExpansion extends PlaceholderExpansion {
     @Override
@@ -39,13 +40,13 @@ public class JustChatExpansion extends PlaceholderExpansion {
     public String onPlaceholderRequest(Player player, String params) {
         if (player == null) return (ChatColor.RED + "Игрок не найден.");
 
-        MarriageMaster marry = main.getMarriageMaster();
+        MarriageMaster marry = getMain().getMarriageMaster();
 
         if (params.equals("married")) {
             if (marry.HasPartner(player)) {
-                return ChatColor.translateAlternateColorCodes('&', "&c❤ &r");
+                return colorize("&c❤ &r");
             } else {
-                return ChatColor.translateAlternateColorCodes('&', "&8❤ &r");
+                return colorize("&8❤ &r");
             }
         }
 

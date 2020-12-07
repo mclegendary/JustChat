@@ -1,0 +1,10 @@
+Short-Message-Warning: '&4Сообщение слишком короткое!'
+Local:
+  Format: '&7[L] &r%luckperms_prefix%%player_name%%luckperms_suffix%&7: &r'
+  Distance: 100
+Global:
+  Format: '&7[&6G&7] &r%luckperms_prefix%%player_name%%luckperms_suffix%&7: &r'
+  Prefix: '!'
+Staff:
+  Format: '&7[&aStaff&7] &r%luckperms_prefix%%player_name%%luckperms_suffix%&7: &r'
+  Prefix: '*'

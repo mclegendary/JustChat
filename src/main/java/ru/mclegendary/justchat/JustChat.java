@@ -5,23 +5,20 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ru.mclegendary.justchat.command.Reload;
 import ru.mclegendary.justchat.event.Listeners;
 import ru.mclegendary.justchat.placeholder.JustChatExpansion;
 
 import at.pcgamingfreaks.MarriageMaster.Bukkit.MarriageMaster;
 
-import static ru.mclegendary.justchat.ConfigManager.setupConfig;
-
 public class JustChat extends JavaPlugin {
-    public static JustChat main;
+    private static JustChat main;
 
     @Override
     public void onEnable() {
         // Main setup
         main = this;
+        this.saveResource("config.yml", false);
 
-        setupConfig();
         placeholdersSetup();
         getLogger().info(ChatColor.AQUA + "Enabled");
 
@@ -33,7 +30,6 @@ public class JustChat extends JavaPlugin {
         }
 
         // Commands
-        this.getCommand("justchat").setExecutor(new Reload());
     }
 
     @Override
@@ -42,8 +38,7 @@ public class JustChat extends JavaPlugin {
     }
 
 
-
-    public JustChat getMain() {
+    public static JustChat getMain() {
         return main;
     }
     public void placeholdersSetup() {

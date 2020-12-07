@@ -1,5 +1,7 @@
 package ru.mclegendary.justchat.util;
 
+import org.bukkit.ChatColor;
+
 public class Util {
 
     public static String removePrefix(String s, String prefix) {
@@ -9,6 +11,10 @@ public class Util {
         }
 
         return s;
+    }
+
+    public static String colorize(String text) {
+        return ChatColor.translateAlternateColorCodes('&', text);
     }
 
 }
